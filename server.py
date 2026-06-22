@@ -51,6 +51,14 @@ def update():
     return Response(generate(), mimetype='text/event-stream')
 
 if __name__ == '__main__':
+    import sys
+    # Force UTF-8 stdout encoding to support printing emojis in Windows cmd/powershell
+    if sys.stdout.encoding != 'utf-8':
+        try:
+            sys.stdout.reconfigure(encoding='utf-8')
+        except AttributeError:
+            pass
+
     print("🚀 Starting local server...")
     print("👉 Open http://localhost:5000 in your browser.")
     # Binding to 0.0.0.0 will make it available on the local network
